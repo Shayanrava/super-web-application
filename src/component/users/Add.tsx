@@ -1,0 +1,122 @@
+import { Button } from "@mui/material";
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardHeader from '@mui/material/CardHeader';
+import Avatar from '@mui/material/Avatar';
+import { People } from "./Home";
+import { useState, FormEvent, Dispatch, SetStateAction } from "react";
+
+interface Props {
+    people: People[],
+    setPeople: Dispatch<SetStateAction<People[]>>
+    ID: number,
+    setID: Dispatch<SetStateAction<number>>
+
+}
+
+
+export default function Add({ people, ID, setPeople, setID }: Props) {
+
+    const [name, setName] = useState<string>()
+    const [age, setAge] = useState<string>()
+    const [url, setUrl] = useState<string>()
+    const [nationality, setNationality] = useState<string>()
+
+    const [errors, setErrors] = useState<boolean[]>([false, false, false])
+
+    const submitHandler = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        if (!name) {
+            setErrors([true, false, false])
+            return alert("Name is required.")
+        }
+        if (!age) {
+            setErrors([false, true, false])
+            return alert("Age is required.")
+        }
+        if (!nationality) {
+            setErrors([false, false, true])
+            return alert("Nationality is required.")
+        }
+        setPeople([...people, {
+            name,
+            nationality,
+            age,
+            id: ID + 1,
+            url
+        }])
+        setID(ID + 1)
+
+        setName("")
+        setAge("")
+        setUrl("")
+        setNationality("")
+
+    }
+
+    return (
+        <div className="w-full flex justify-center my-28 ">
+            <div className="w-3/4 border border-black flex-col item-center bg-gray-300">
+                <form action="" className='flex flex-col items-center' onSubmit={(e) => submitHandler(e)} >
+                    <TextField error={errors[0]} label="Name" value={name} onChange={(e) => setName(e.target.value)} className='w-1/2 my-7 mx-10' />
+                    <TextField error={errors[1]} label="Age" value={age} onChange={(e) => setAge(e.target.value)} className='w-1/2 my-7 mx-10' />
+                    <TextField error={errors[2]} label="Nationality" value={nationality} onChange={(e) => setNationality(e.target.value)} className='w-1/2 my-7 mx-10' />
+                    <TextField label="Profile URL" value={url} onChange={(e) => setUrl(e.target.value)} className='w-1/2 my-7 mx-10' />
+                    <div className="flex justify-center w-full">
+                        <Button
+                            className="w-1/5 border-0 bg-sky-400 text-white rounded-md px-5 py-3 my-3 hover:shadow-lg hover:bg-[rgba(56,189,248,.9)]"
+                            type="submit"
+                        >
+                            ADD
+                        </Button>
+                    </div>
+                </form>
+                <Box className="w-full flex justify-center my-7">
+                    <Card className="w-1/4 bg-blue-200 rounded-lg overflow-visible relative ">
+                        <CardHeader
+                            avatar={
+                                <Avatar aria-label="" >
+                                    {
+                                        url ?
+                                            <img src={url} className=" object-cover w-full h-full" alt="" />
+                                            :
+                                            name && <Typography className="bg-black text-white w-full h-full flex items-center justify-center">{name? name[0].toUpperCase():""}</Typography>
+                                    }
+                                </Avatar>
+                            }
+                            title={
+                                <Typography variant="h5" component="div">
+                                    {name }
+                                </Typography>
+                            }
+                            subheader={
+                                <Typography variant="body2" color="text.secondary">
+                                    {nationality }
+                                </Typography>
+                            }
+
+                        />
+                        <CardContent sx={{ height: '100%' }} >
+                           {
+                            age &&
+                            <Typography variant="body2" className="bg-cyan-300 rounded-2xl inline-block px-3 py-1 absolute -top-3 -left-3  z-50">
+                                {age} years
+                            </Typography>
+                           } 
+
+                            <Box>
+                                <Button variant="contained" color="success" className="mx-3">edit</Button>
+                                <Button variant="contained" color="error" className="">delete</Button>
+                            </Box>
+                        </CardContent>
+                    </Card>
+                </Box>
+
+            </div>
+        </div>
+
+    )
+}
