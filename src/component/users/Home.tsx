@@ -20,7 +20,7 @@ export default function Home() {
     const [id , setID]= useState<number>(2)
     const [people, setPeople] = useState<People[]>([
         { name: "Ahmed Martush", id: 0, nationality: "Turkey", age: "27" },
-        { name: "Edmilson Junior", id: 1, nationality: "Brazil", age: "31", url: "https://www.nasa.gov/wp-content/uploads/2023/03/iss065e049854-1.jpg" },
+        { name: "Edmilson Junior", id: 1, nationality: "Brazil", age: "31", url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSKNQgtVv2QOsmZ2nsEwCnyIkb7gG7ivpRjQ&s" },
         { name: "Masata Delafuente", id: 2, nationality: "Mexico", age: "25" },
 
     ])
