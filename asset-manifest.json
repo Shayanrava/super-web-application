@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/super-web-application/static/css/main.e85879cd.css",
+    "main.js": "/super-web-application/static/js/main.35b36c65.js",
+    "index.html": "/super-web-application/index.html",
+    "main.e85879cd.css.map": "/super-web-application/static/css/main.e85879cd.css.map",
+    "main.35b36c65.js.map": "/super-web-application/static/js/main.35b36c65.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e85879cd.css",
+    "static/js/main.35b36c65.js"
+  ]
+}
