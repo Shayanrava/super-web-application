@@ -84,7 +84,7 @@ export default function Edit({ people, setPeople, ID }: Props) {
 
     return (
         <>
-            <Button variant="contained" color="success" className="mx-3" onClick={ClickHandler}>edit <EditDocumentIcon className="mx-1"></EditDocumentIcon> </Button>
+            <Button variant="contained" color="success" className="w-full my-2 mx-0 md:my-0 md:mx-3 md:w-auto " onClick={ClickHandler}>edit <EditDocumentIcon className="mx-1"></EditDocumentIcon> </Button>
 
             <Modal
                 open={isOpen}

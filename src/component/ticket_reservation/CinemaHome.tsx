@@ -38,7 +38,8 @@ export default function CinemaHome() {
   // i & j for seats
   const rows: number = 5;
   const col: number = 8;
-  const images: string[] = ['/shopping1.gif', '/shopping2.gif', '/shopping3.gif', '/shopping4.gif', '/Failed1.gif', '/Failed2.gif',]
+  const images: string[] = [process.env.PUBLIC_URL + '/shopping1.gif', process.env.PUBLIC_URL + '/shopping2.gif', process.env.PUBLIC_URL + '/shopping3.gif',
+  process.env.PUBLIC_URL + '/shopping4.gif', process.env.PUBLIC_URL + '/Failed1.gif', process.env.PUBLIC_URL + '/Failed2.gif',]
 
   // initial btnArr
   useEffect(() => {

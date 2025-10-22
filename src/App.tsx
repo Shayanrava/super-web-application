@@ -12,7 +12,7 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
+      <BrowserRouter basename='/super-web-application'>
         <AppBar position="static" className='fixed top-0 z-50'>
           <Toolbar className=' flex justify-center items-center gap-20'>
             <Typography variant="h6" className='hover:scale-125 transition duration-700' >

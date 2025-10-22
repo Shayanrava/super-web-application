@@ -27,7 +27,7 @@ export default function List({ people , setPeople }: Props) {
 
   return (
     <div className="w-full flex">
-      <Box className="w-full grid grid-cols-4 gap-4 mt-4 px-5">
+      <Box className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4 px-5">
         {people.map((person) => {
           return (
             <Card key={person.id} className="bg-blue-200 hover:shadow-[0px_0px_50px_20px_rgba(255,255,255,1)] rounded-lg hover:bg-blue-400 overflow-visible relative ">
@@ -62,7 +62,7 @@ export default function List({ people , setPeople }: Props) {
                   {person.id}
                 </Typography>
 
-                <Box className="my-3">
+                <Box className="flex flex-col md:flex-row my-3">
                   <Edit people={people} setPeople={setPeople} ID={person.id}></Edit>
                   <Button variant="contained" color="error" className="" onClick={() => DeleteUser(person.id)}>delete <DeleteForeverIcon className="mx-1"></DeleteForeverIcon> </Button>
                 </Box>

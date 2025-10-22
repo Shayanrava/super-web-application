@@ -59,12 +59,12 @@ export default function Add({ people, ID, setPeople, setID }: Props) {
 
     return (
         <div className="w-full flex justify-center my-28 ">
-            <div className="w-3/4 border border-black flex-col item-center bg-gray-300">
+            <div className="w-full md:w-5/6 lg:w-3/4 border border-black flex-col item-center bg-gray-300">
                 <form action="" className='flex flex-col items-center' onSubmit={(e) => submitHandler(e)} >
-                    <TextField error={errors[0]} label="Name" value={name} onChange={(e) => setName(e.target.value)} className='w-1/2 my-7 mx-10' />
-                    <TextField error={errors[1]} label="Age" value={age} onChange={(e) => setAge(e.target.value)} className='w-1/2 my-7 mx-10' />
-                    <TextField error={errors[2]} label="Nationality" value={nationality} onChange={(e) => setNationality(e.target.value)} className='w-1/2 my-7 mx-10' />
-                    <TextField label="Profile URL" value={url} onChange={(e) => setUrl(e.target.value)} className='w-1/2 my-7 mx-10' />
+                    <TextField error={errors[0]} label="Name" value={name} onChange={(e) => setName(e.target.value)} className='w-5/6 mx-1 my-3 lg:w-2/3 lg:my-7 lg:mx-10' />
+                    <TextField error={errors[1]} label="Age" value={age} onChange={(e) => setAge(e.target.value)} className='w-5/6  lg:w-2/3 lg:my-7 lg:mx-10' />
+                    <TextField error={errors[2]} label="Nationality" value={nationality} onChange={(e) => setNationality(e.target.value)} className='w-5/6 mx-1 my-3 lg:w-2/3 lg:my-7 lg:mx-10' />
+                    <TextField label="Profile URL" value={url} onChange={(e) => setUrl(e.target.value)} className='w-5/6 mx-1 my-3 lg:w-2/3 lg:my-7 lg:mx-10' />
                     <div className="flex justify-center w-full">
                         <Button
                             className="w-1/5 border-0 bg-sky-400 text-white rounded-md px-5 py-3 my-3 hover:shadow-lg hover:bg-[rgba(56,189,248,.9)]"
@@ -75,7 +75,7 @@ export default function Add({ people, ID, setPeople, setID }: Props) {
                     </div>
                 </form>
                 <Box className="w-full flex justify-center my-7">
-                    <Card className="w-1/4 bg-blue-200 rounded-lg overflow-visible relative ">
+                    <Card className="w-4/5 bg-blue-200 rounded-lg overflow-visible relative sm:w-1/2 lg:w-1/3 xl:w-1/4">
                         <CardHeader
                             avatar={
                                 <Avatar aria-label="" >
@@ -88,7 +88,7 @@ export default function Add({ people, ID, setPeople, setID }: Props) {
                                 </Avatar>
                             }
                             title={
-                                <Typography variant="h5" component="div">
+                                <Typography variant="h5" component="div" className="text-lg">
                                     {name }
                                 </Typography>
                             }
@@ -107,9 +107,9 @@ export default function Add({ people, ID, setPeople, setID }: Props) {
                             </Typography>
                            } 
 
-                            <Box>
-                                <Button variant="contained" color="success" className="mx-3">edit</Button>
-                                <Button variant="contained" color="error" className="">delete</Button>
+                            <Box className="flex flex-col md:flex-row gap-3 ">
+                                <Button variant="contained" color="success" >edit</Button>
+                                <Button variant="contained" color="error" >delete</Button>
                             </Box>
                         </CardContent>
                     </Card>

@@ -4,31 +4,20 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button'
 import { InputAdornment, Avatar } from "@mui/material";
-
 import { OutlinedInput, FormControl, InputLabel } from "@mui/material";
 
 
-
-
-
-
-
-
-
 export default function ExchangeRates() {
-
   const [rates, setRates] = useState<Record<string, number> | null>(null);
   const [names, setNames] = useState<Record<string, string> | null>(null);
   const [amount, setAmount] = useState<number>(1)
   const [isShowCalculate, setIsShowCalculate] = useState<boolean>(false)
-  const [isFocus , setIsFocus] = useState<boolean>(false)
-
+  const [isFocus, setIsFocus] = useState<boolean>(false)
   const [isShowFrom, setIsShowForm] = useState<boolean>(false)
   const [keyFrom, setKeyFrom] = useState<string>("USD")
   const [nameFrom, setNameFrom] = useState<string>("- United States Dollar")
   const [urlFrom, setUrlFrom] = useState<string>("https://www.xe.com/svgs/flags/usd.static.svg")
   const [valueFrom, setValueFrom] = useState<number>(0)
-
   const [isShowTo, setIsShowTo] = useState<boolean>(false)
   const [keyTo, setKeyTo] = useState<string>("EUR")
   const [nameTo, setNameTo] = useState<string>("- EURO")
@@ -64,34 +53,26 @@ export default function ExchangeRates() {
     setUrlFrom(url)
     setIsShowForm(false)
     setValueFrom(value)
-
   }
-
   const ClickPanelTo = (key: string, name: string, value: number, url: string): void => {
     setKeyTo(key)
     setNameTo(name)
     setUrlTo(url)
     setIsShowTo(false)
     setValueTo(value)
-
   }
   const togglePanelFrom = (): void => {
     setIsShowForm(!isShowFrom)
     setIsShowTo(false)
-
-
   }
-
   const togglePanelTo = (): void => {
     setIsShowTo(!isShowTo)
     setIsShowForm(false)
   }
-
   const resetPanels = (): void => {
     setIsShowTo(false)
     setIsShowForm(false)
   }
-
   const calculate = () => {
     if (valueFrom === 0 || valueTo === 0) {
       setValueFrom(rates!["USD"])
@@ -120,8 +101,8 @@ export default function ExchangeRates() {
                   className='px-4 py-6 text-xl'
                   type='number'
                   value={isFocus ? amount : amount.toFixed(2)}
-                  onFocus={()=>{setIsFocus(true)}}
-                  onBlur={()=>setIsFocus(false)}
+                  onFocus={() => { setIsFocus(true) }}
+                  onBlur={() => setIsFocus(false)}
                   onChange={(e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => setAmount(Number(Number(e.target.value).toFixed(2)))}
                   startAdornment={
                     <InputAdornment position="start">
@@ -197,12 +178,13 @@ export default function ExchangeRates() {
                 {isShowCalculate && (
                   <>
                     <Box className="text-xl text-[rgb(92,102,123)]">{amount.toFixed(2)} {keyFrom} =</Box>
-                    <Box className="text-[rgb(46, 60, 87)]">{(amount * valueTo / valueFrom).toFixed(6)}</Box>
+                    <Box className="text-[rgb(46, 60, 87)] text-3xl my-2">{(amount * valueTo / valueFrom).toFixed(6)} {keyTo}</Box>
                   </>)
                 }
               </Box>
-              <Button variant="contained" className='w-1/5 bg-blue-450 py-4' onClick={calculate}>Convert</Button>
-
+              <Box className='w-1/5 bg-blue-450 py-4 '>
+                <Button variant="contained" className='w-full py-4 ' onClick={calculate}>Convert</Button>
+              </Box>
             </Box>
           </div>
         )}
