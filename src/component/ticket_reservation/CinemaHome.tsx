@@ -106,7 +106,7 @@ export default function CinemaHome() {
 
       <Typography variant='h3' className='mt-28 mb-5 text-yellow-300'> Book Ticket </Typography>
 
-      <div className='w-1/2 flex flex-col items-center'>
+      <div className='w-full md:w-3/4 lg:w-3/5 xl:w-1/2 flex flex-col items-center px-2'>
         <Typography className='bg-[#444] w-full text-center text-white rounded-md py-3'>Screen</Typography>
 
         <div className="relative w-full h-[50px] bg-black">
@@ -114,17 +114,28 @@ export default function CinemaHome() {
         </div>
       </div>
 
-      <div className={`w-1/2 grid grid-cols-8 gap-4 my-10`}>
+      <div className='w-full grid grid-cols-8 gap-x-1 gap-y-4 my-10 px-2 md:w-3/4 lg:w-3/5 xl:w-1/2  sm:gap-x-4 sm:gap-y-4'>
         {
           btnArr.map((btn) => {
             return (
-              <Button variant="contained" key={(btn.row * col) + btn.number}
-                className={` ${btn.isSelected ? "bg-red-400" : btn.isReserve ? "bg-gray-500" : "bg-fuchsia-700"} 
+              <>
+                <Button variant="contained" key={(btn.row * col) + btn.number}
+                  className={` ${btn.isSelected ? "bg-red-400" : btn.isReserve ? "bg-gray-500" : "bg-fuchsia-700"} 
                            ${btn.isSelected ? "hover:bg-red-500" : btn.isReserve ? "" : "hover:bg-fuchsia-800"}
-                           transition duration-500
+                           transition duration-500 hidden sm:flex
                           `}
-                disabled={btn.isReserve}
-                onClick={() => ClickHandler(btn.row, btn.number)}>{(btn.row * col) + btn.number + 1}</Button>
+                  disabled={btn.isReserve}
+                  onClick={() => ClickHandler(btn.row, btn.number)}>{(btn.row * col) + btn.number + 1}</Button>
+
+                <button key={(btn.row * col) + btn.number}
+                  className={` ${btn.isSelected ? "bg-red-400" : btn.isReserve ? "bg-gray-500" : "bg-fuchsia-700"} 
+                           ${btn.isSelected ? "hover:bg-red-500" : btn.isReserve ? "" : "hover:bg-fuchsia-800"}
+                           transition duration-500 flex justify-center size-12 text-white rounded-lg items-center sm:hidden 
+                          `}
+                  disabled={btn.isReserve}
+                  onClick={() => ClickHandler(btn.row, btn.number)}>{(btn.row * col) + btn.number + 1}</button>
+
+              </>
             )
           })
         }
