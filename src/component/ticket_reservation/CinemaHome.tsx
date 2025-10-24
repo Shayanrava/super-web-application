@@ -130,7 +130,7 @@ export default function CinemaHome() {
                 <button key={(btn.row * col) + btn.number}
                   className={` ${btn.isSelected ? "bg-red-400" : btn.isReserve ? "bg-gray-500" : "bg-fuchsia-700"} 
                            ${btn.isSelected ? "hover:bg-red-500" : btn.isReserve ? "" : "hover:bg-fuchsia-800"}
-                           transition duration-500 flex justify-center size-12 text-white rounded-lg items-center sm:hidden 
+                           transition duration-500 flex justify-center size-11 text-white rounded-lg items-center sm:hidden 
                           `}
                   disabled={btn.isReserve}
                   onClick={() => ClickHandler(btn.row, btn.number)}>{(btn.row * col) + btn.number + 1}</button>
