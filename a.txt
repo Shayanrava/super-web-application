@@ -1,0 +1,113 @@
+
+<Box className='bg-gray-100 flex flex-col items-center py-4  w-3/4 rounded-3xl '>
+  <Box className='w-full py-190 px-4 flex flex-col items-center' >
+    <FormControl className=' w-1/2' variant="outlined" onClick={resetPanels}>
+      <InputLabel> Amount</InputLabel>
+      <OutlinedInput
+        className='px-4 py-6 text-xl'
+        type='number'
+        value={isFocus ? amount : amount.toFixed(2)}
+        onFocus={() => { setIsFocus(true) }}
+        onBlur={() => setIsFocus(false)}
+        onChange={(e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => setAmount(Number(Number(e.target.value).toFixed(2)))}
+        startAdornment={
+          <InputAdornment position="start">
+            <Typography variant="body1" color="initial" className='px-2 text-3xl'>$</Typography>
+          </InputAdornment>
+        }
+      />
+
+    </FormControl>
+    <Box className="my-3 relative w-full" onClick={togglePanelFrom} >
+      <FormControl className='w-full' variant="outlined" disabled>
+        <InputLabel> From</InputLabel>
+        <OutlinedInput
+          className='px-4 py-6'
+          startAdornment={
+            <InputAdornment position="start" >
+              <Box className='flex items-center '>
+                <Avatar
+                  src={urlFrom}
+                />
+                <Typography variant="body1" color="initial" className='px-2'>{keyFrom}</Typography>
+                <Typography variant="body1" color="initial" className='text-gray-400'>{nameFrom}</Typography>
+              </Box>
+            </InputAdornment>
+          }
+          label="From"
+        />
+      </FormControl>
+      <div className={` absolute h-[250px] w-full bg-white top-[105%] rounded-md overflow-y-scroll z-30 ${isShowFrom ? "flex" : "hidden"}`}>
+        <ul >
+          {Object.entries(rates).map(([key, value]) => ((names[key] && key !== "SSP") &&
+            <li key={key} className='flex gap-5 text-sm border-blue-400 px-2 py-3 rounded-md cursor-pointer hover:border' onClick={() => ClickPanelFrom(key, names[key], value, `https://www.xe.com/svgs/flags/${key.toLowerCase()}.static.svg`)}>
+              <img className='size-6' src={`	https://www.xe.com/svgs/flags/${key.toLowerCase()}.static.svg`} alt="" />
+              <Typography variant="body1" className='text-sm '>{` ${key}   ${names[key]} `}</Typography>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </Box>
+    <Box className=" relative w-full" onClick={togglePanelTo} >
+      <FormControl className='my-3 w-full' variant="outlined" disabled>
+        <InputLabel>To</InputLabel>
+        <OutlinedInput
+          className='px-4 py-6'
+          startAdornment={
+            <InputAdornment position="start" >
+              <Box className='flex items-center '>
+                <Avatar
+                  src={urlTo}
+                />
+                <Typography variant="body1" color="initial" className='px-2'>{keyTo}</Typography>
+                <Typography variant="body1" color="initial" className='text-gray-400'>{nameTo}</Typography>
+              </Box>
+            </InputAdornment>
+          }
+          label="From"
+        />
+      </FormControl>
+      <div className={` absolute h-[250px] w-full bg-white top-[105%] rounded-md overflow-y-scroll z-10 ${isShowTo ? "flex" : "hidden"}`}>
+        <ul >
+          {Object.entries(rates).map(([key, value]) => ((names[key] && key !== "SSP") &&
+            <li key={key} className='flex gap-5 text-sm border-blue-400 px-2 py-3 rounded-md cursor-pointer hover:border' onClick={() => ClickPanelTo(key, names[key], value, `https://www.xe.com/svgs/flags/${key.toLowerCase()}.static.svg`)}>
+              <img className='size-6' src={`	https://www.xe.com/svgs/flags/${key.toLowerCase()}.static.svg`} alt="" />
+              <Typography variant="body1" className='text-sm '>{` ${key}   ${names[key]} `}</Typography>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </Box>
+  </Box>
+  <Box className="w-full flex justify-start  px-4">
+    <Box className="w-1/2 mr-auto flex flex-col  items-start px-3 py-2">
+      {isShowCalculate && (
+        <>
+          <Box className="text-xl text-[rgb(92,102,123)]">{amount.toFixed(2)} {keyFrom} =</Box>
+          <Box className="text-[rgb(46, 60, 87)] text-3xl my-2">{(amount * valueTo / valueFrom).toFixed(6)} {keyTo}</Box>
+        </>)
+      }
+    </Box>
+    <Box className='w-1/5 bg-blue-450 py-4 '>
+      <Button variant="contained" className='w-full py-4 ' onClick={calculate}>Convert</Button>
+    </Box>
+  </Box>
+</Box>
+
+
+const [amount, setAmount] = useState<number>(1)
+
+const [isFocus, setIsFocus] = useState < boolean > (false)
+
+
+
+
+
+const calculate = () => {
+    if (valueFrom === 0 || valueTo === 0) {
+        setValueFrom(rates!["USD"])
+        setValueTo(rates!["EUR"])
+    }
+    setIsShowForm(false)
+    setIsShowCalculate(true)
+}
