@@ -62,7 +62,7 @@ export default function Add({ people, ID, setPeople, setID }: Props) {
             <div className="w-full md:w-5/6 lg:w-3/4 border border-black flex-col item-center bg-gray-300">
                 <form action="" className='flex flex-col items-center' onSubmit={(e) => submitHandler(e)} >
                     <TextField error={errors[0]} label="Name" value={name} onChange={(e) => setName(e.target.value)} className='w-5/6 mx-1 my-3 lg:w-2/3 lg:my-7 lg:mx-10' />
-                    <TextField error={errors[1]} label="Age" value={age} onChange={(e) => setAge(e.target.value)} className='w-5/6  lg:w-2/3 lg:my-7 lg:mx-10' />
+                    <TextField error={errors[1]} label="Age" type="number" value={age} onChange={(e) => setAge(e.target.value)} className='w-5/6  lg:w-2/3 lg:my-7 lg:mx-10' />
                     <TextField error={errors[2]} label="Nationality" value={nationality} onChange={(e) => setNationality(e.target.value)} className='w-5/6 mx-1 my-3 lg:w-2/3 lg:my-7 lg:mx-10' />
                     <TextField label="Profile URL" value={url} onChange={(e) => setUrl(e.target.value)} className='w-5/6 mx-1 my-3 lg:w-2/3 lg:my-7 lg:mx-10' />
                     <div className="flex justify-center w-full">

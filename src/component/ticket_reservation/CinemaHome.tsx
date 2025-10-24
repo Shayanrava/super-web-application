@@ -173,10 +173,10 @@ export default function CinemaHome() {
           },
         }}
       >
-        <Fade in={openInvoice}>
-          <Box className="absolute top-1/2 left-1/2 bg-cyan-100 -translate-y-1/2 -translate-x-1/2 w-1/3 h-1/2 flex flex-col items-center justify-center" >
+        <Fade in={openInvoice} >
+          <Box className="w-5/6 md:w-3/5 lg:w-1/2 xl:w-1/3 h-3/5 md:h-1/2  absolute top-1/2 left-1/2 bg-cyan-100 -translate-y-1/2 -translate-x-1/2  flex flex-col items-center justify-center" >
             <Box className=" flex justify-center">
-              <img src="/PopCorn.gif" alt='' />
+              <img src={`${process.env.PUBLIC_URL }/PopCorn.gif`} alt='' />
             </Box>
             <Box className=' my-8 w-2/3 flex flex-col gap-3'>
               <Alert color='info'>
@@ -187,7 +187,6 @@ export default function CinemaHome() {
               </Alert>
               <Button variant='contained' onClick={() => setOpenInvoice(!openInvoice)}>OK</Button>
             </Box>
-
           </Box>
         </Fade>
       </Modal >
@@ -205,7 +204,7 @@ export default function CinemaHome() {
 
       >
         <Fade in={openResult}>
-          <Box className={`${successShop ? 'bg-green-200' : 'bg-red-200'} absolute top-1/2 left-1/2 bg-gray-300 -translate-y-1/2 -translate-x-1/2 px-14 py-6 w-1/3 h-1/2`} >
+          <Box className={`${successShop ? 'bg-green-200' : 'bg-red-200'} w-11/12 md:w-3/5 lg:w-1/2 xl:w-1/3 h-3/5 md:h-1/2  absolute top-1/2 left-1/2 bg-gray-300 -translate-y-1/2 -translate-x-1/2 px-14 py-6 `} >
             <Box className=" flex justify-center">
               <img src={openResult ? (successShop ? images[Math.floor(Math.random() * 4)] : images[Math.floor(Math.random() * 2) + 4]) : ""} alt="" />
             </Box>

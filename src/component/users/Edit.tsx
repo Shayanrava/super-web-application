@@ -10,6 +10,8 @@ import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import Avatar from '@mui/material/Avatar';
 import TextField from '@mui/material/TextField';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+
 
 
 
@@ -40,7 +42,7 @@ export default function Edit({ people, setPeople, ID }: Props) {
             setNationality(targetPerson.nationality);
         }
     }, [targetPerson]);
-    const submitHandler = (e: FormEvent<HTMLFormElement>):void => {
+    const submitHandler = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault()
         if (!name) {
             setErrors([true, false, false])
@@ -78,7 +80,7 @@ export default function Edit({ people, setPeople, ID }: Props) {
         setNationality("")
 
     }
-    const ClickHandler = ():void => {
+    const ClickHandler = (): void => {
         setIsOpen(!isOpen)
     }
 
@@ -92,23 +94,23 @@ export default function Edit({ people, setPeople, ID }: Props) {
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box className=' w-2/3 h-4/5 overflow-scroll flex-col item-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white border'>
-                    <form action="" className='flex flex-col items-center' onSubmit={(e) => submitHandler(e)} >
-                        <TextField error={errors[0]} label="Name" value={name} onChange={(e) => setName(e.target.value)} className='w-1/2 my-7 mx-10' />
-                        <TextField error={errors[1]} label="Age" value={age} onChange={(e) => setAge(e.target.value)} className='w-1/2 my-7 mx-10' />
-                        <TextField error={errors[2]} label="Nationality" value={nationality} onChange={(e) => setNationality(e.target.value)} className='w-1/2 my-7 mx-10' />
-                        <TextField label="Profile URL" value={url} onChange={(e) => setUrl(e.target.value)} className='w-1/2 my-7 mx-10' />
+                <Box className='w-11/12 md:w-3/4 lg:w-2/3 h-4/5 overflow-scroll flex-col item-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white border'>
+                    <form action="" className='flex flex-col items-center px-4' onSubmit={(e) => submitHandler(e)} >
+                        <TextField error={errors[0]} label="Name" value={name} onChange={(e) => setName(e.target.value)} className='w-full md:w-3/4 lg:w-3/5 xl:w-1/2 my-7 mx-10' />
+                        <TextField error={errors[1]} label="Age" value={age} onChange={(e) => setAge(e.target.value)} className='w-full md:w-3/4 lg:w-3/5 xl:w-1/2 my-7 mx-10' />
+                        <TextField error={errors[2]} label="Nationality" value={nationality} onChange={(e) => setNationality(e.target.value)} className='w-full md:w-3/4 lg:w-3/5 xl:w-1/2 my-7 mx-10' />
+                        <TextField label="Profile URL" value={url} onChange={(e) => setUrl(e.target.value)} className='w-full md:w-3/4 lg:w-3/5 xl:w-1/2 my-7 mx-10' />
                         <div className="flex justify-center w-full">
                             <Button
-                                className="w-1/5 border-0 bg-sky-400 text-white rounded-md px-5 py-3 my-3 hover:shadow-lg hover:bg-[rgba(56,189,248,.9)]"
+                                className="w-1/3 md:w-1/4 xl:w-1/5 border-0 bg-sky-400 text-white rounded-md px-5 py-3 my-3 hover:shadow-lg hover:bg-[rgba(56,189,248,.9)]"
                                 type="submit"
                             >
                                 edit
                             </Button>
                         </div>
                     </form>
-                    <Box className="w-full flex justify-center my-7">
-                        <Card className="w-1/4 bg-blue-200 rounded-lg overflow-visible relative ">
+                    <Box className="w-full flex justify-center my-7 px-1">
+                        <Card className="w-11/12 sm:w-3/5 lg:w-1/2 xl:w-2/5 bg-blue-200 rounded-lg overflow-visible relative ">
                             <CardHeader
                                 avatar={
                                     <Avatar aria-label="" >
@@ -121,12 +123,12 @@ export default function Edit({ people, setPeople, ID }: Props) {
                                     </Avatar>
                                 }
                                 title={
-                                    <Typography variant="h5" component="div">
+                                    <Typography className='text-lg' variant="h5" component="div">
                                         {name}
                                     </Typography>
                                 }
                                 subheader={
-                                    <Typography variant="body2" color="text.secondary">
+                                    <Typography className='text-sm' variant="body2" color="text.secondary">
                                         {nationality}
                                     </Typography>
                                 }
@@ -140,9 +142,9 @@ export default function Edit({ people, setPeople, ID }: Props) {
                                     </Typography>
                                 }
 
-                                <Box>
-                                    <Button variant="contained" color="success" className="mx-3">edit</Button>
-                                    <Button variant="contained" color="error" className="">delete</Button>
+                                <Box className="flex flex-col md:flex-row gap-3">
+                                    <Button className="w-full md:w-auto" variant="contained" color="success" >edit <EditDocumentIcon className="mx-1"></EditDocumentIcon></Button>
+                                    <Button className="w-full md:w-auto" variant="contained" color="error" >delete <DeleteForeverIcon className="mx-1"></DeleteForeverIcon></Button>
                                 </Box>
                             </CardContent>
                         </Card>
