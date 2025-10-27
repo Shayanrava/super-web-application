@@ -59,7 +59,7 @@ export default function Edit({ people, ID }: Props) {
         if (url) {
             formData.append("url", url);
         }
-        await axios.put(`http://localhost:12793/users/${ID}`, formData, {
+        await axios.put(`https://super-web-application-backend-production.up.railway.app/users/${ID}`, formData, {
             headers: {
                 "Content-Type": "multipart/form-data"
             }
