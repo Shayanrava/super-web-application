@@ -23,7 +23,7 @@ export default function Home() {
     }, [])
     const [people, setPeople] = useState<People[]>([])
     const getUsers = async (): Promise<void> => {
-        const res: AxiosResponse<any, any, {}> = await axios.get("http://localhost:12793/users")
+        const res: AxiosResponse<any, any, {}> = await axios.get("https://super-web-application-backend-production.up.railway.app/users")
         setPeople(res.data)
     }
     return (
