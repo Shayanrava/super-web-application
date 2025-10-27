@@ -18,7 +18,7 @@ export default function List({ people }: Props) {
 
   const DeleteUser = async (ID: number): Promise<void> => {
     try {
-      await axios.delete(`http://localhost:12793/users/${ID}`)
+      await axios.delete(`https://super-web-application-backend-production.up.railway.app/users/${ID}`)
     } catch (error) {
       console.log(error);
     }
