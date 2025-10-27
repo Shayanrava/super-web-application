@@ -1,4 +1,3 @@
-import  {Dispatch ,SetStateAction } from "react";
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -9,20 +8,21 @@ import Avatar from '@mui/material/Avatar'
 import { People } from "./Home";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import Edit from "./Edit";
-
-
+import axios from "axios";
 
 interface Props {
   people: People[],
-  setPeople: Dispatch<SetStateAction<People[]>>
-
 }
 
-export default function List({ people , setPeople }: Props) {
+export default function List({ people }: Props) {
 
-  const DeleteUser = (ID: number): void => {
-       const filteredPeople = people.filter((p)=>p.id !== ID)
-       setPeople(filteredPeople)
+  const DeleteUser = async (ID: number): Promise<void> => {
+    try {
+      await axios.delete(`http://localhost:12793/users/${ID}`)
+    } catch (error) {
+      console.log(error);
+    }
+    window.location.reload()
   }
 
   return (
@@ -63,7 +63,7 @@ export default function List({ people , setPeople }: Props) {
                 </Typography>
 
                 <Box className="flex flex-col md:flex-row my-3">
-                  <Edit people={people} setPeople={setPeople} ID={person.id}></Edit>
+                  <Edit people={people} ID={person.id}></Edit>
                   <Button variant="contained" color="error" className="" onClick={() => DeleteUser(person.id)}>delete <DeleteForeverIcon className="mx-1"></DeleteForeverIcon> </Button>
                 </Box>
               </CardContent>

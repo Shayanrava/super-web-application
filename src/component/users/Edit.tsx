@@ -1,4 +1,4 @@
-import { SetStateAction, Dispatch, useState, FormEvent, useEffect } from 'react'
+import { useState, FormEvent, useEffect } from 'react'
 import Button from '@mui/material/Button'
 import EditDocumentIcon from '@mui/icons-material/EditDocument';
 import { People } from "./Home";
@@ -11,20 +11,15 @@ import CardHeader from '@mui/material/CardHeader';
 import Avatar from '@mui/material/Avatar';
 import TextField from '@mui/material/TextField';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-
-
-
-
+import axios from "axios";
 
 interface Props {
     people: People[],
-    setPeople: Dispatch<SetStateAction<People[]>>,
     ID: number
 
 }
 
-export default function Edit({ people, setPeople, ID }: Props) {
-
+export default function Edit({ people, ID }: Props) {
 
     const targetPerson: People | undefined = people.find(person => person.id === ID);
     const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -42,7 +37,8 @@ export default function Edit({ people, setPeople, ID }: Props) {
             setNationality(targetPerson.nationality);
         }
     }, [targetPerson]);
-    const submitHandler = (e: FormEvent<HTMLFormElement>): void => {
+
+    const submitHandler = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault()
         if (!name) {
             setErrors([true, false, false])
@@ -56,30 +52,21 @@ export default function Edit({ people, setPeople, ID }: Props) {
             setErrors([false, false, true])
             return alert("Nationality is required.")
         }
-        const filteredPeople: People[] = []
-        people.forEach((person) => {
-            if (person.id === ID) {
-                filteredPeople.push(
-                    {
-                        name,
-                        nationality,
-                        age,
-                        id: ID,
-                        url
-                    }
-                )
-            } else {
-                filteredPeople.push(person)
+        const formData: FormData = new FormData();
+        formData.append("name", name);
+        formData.append("age", age);
+        formData.append("nationality", nationality);
+        if (url) {
+            formData.append("url", url);
+        }
+        await axios.put(`http://localhost:12793/users/${ID}`, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data"
             }
-        })
-        setPeople(filteredPeople)
-        setIsOpen(!isOpen)
-        setName("")
-        setAge("")
-        setUrl("")
-        setNationality("")
-
+        });
+        window.location.reload()
     }
+
     const ClickHandler = (): void => {
         setIsOpen(!isOpen)
     }

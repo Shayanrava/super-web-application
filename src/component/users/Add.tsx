@@ -7,18 +7,15 @@ import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import Avatar from '@mui/material/Avatar';
 import { People } from "./Home";
-import { useState, FormEvent, Dispatch, SetStateAction } from "react";
+import { useState, FormEvent } from "react";
+import axios from "axios";
 
 interface Props {
     people: People[],
-    setPeople: Dispatch<SetStateAction<People[]>>
-    ID: number,
-    setID: Dispatch<SetStateAction<number>>
-
 }
 
 
-export default function Add({ people, ID, setPeople, setID }: Props) {
+export default function Add({ people }: Props) {
 
     const [name, setName] = useState<string>()
     const [age, setAge] = useState<string>()
@@ -27,8 +24,10 @@ export default function Add({ people, ID, setPeople, setID }: Props) {
 
     const [errors, setErrors] = useState<boolean[]>([false, false, false])
 
-    const submitHandler = (e: FormEvent<HTMLFormElement>) => {
+    const submitHandler = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault()
+        const formData = new FormData();
+
         if (!name) {
             setErrors([true, false, false])
             return alert("Name is required.")
@@ -41,20 +40,19 @@ export default function Add({ people, ID, setPeople, setID }: Props) {
             setErrors([false, false, true])
             return alert("Nationality is required.")
         }
-        setPeople([...people, {
-            name,
-            nationality,
-            age,
-            id: ID + 1,
-            url
-        }])
-        setID(ID + 1)
+        formData.append("name", name);
+        formData.append("age", age);
+        formData.append("nationality", nationality);
+        if (url) {
+            formData.append("url", url);
+        }
 
-        setName("")
-        setAge("")
-        setUrl("")
-        setNationality("")
-
+        await axios.post("http://localhost:12793/users", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        });
+        window.location.reload()
     }
 
     return (
@@ -83,29 +81,29 @@ export default function Add({ people, ID, setPeople, setID }: Props) {
                                         url ?
                                             <img src={url} className=" object-cover w-full h-full" alt="" />
                                             :
-                                            name && <Typography className="bg-black text-white w-full h-full flex items-center justify-center">{name? name[0].toUpperCase():""}</Typography>
+                                            name && <Typography className="bg-black text-white w-full h-full flex items-center justify-center">{name ? name[0].toUpperCase() : ""}</Typography>
                                     }
                                 </Avatar>
                             }
                             title={
                                 <Typography variant="h5" component="div" className="text-lg">
-                                    {name }
+                                    {name}
                                 </Typography>
                             }
                             subheader={
                                 <Typography variant="body2" color="text.secondary">
-                                    {nationality }
+                                    {nationality}
                                 </Typography>
                             }
 
                         />
                         <CardContent sx={{ height: '100%' }} >
-                           {
-                            age &&
-                            <Typography variant="body2" className="bg-cyan-300 rounded-2xl inline-block px-3 py-1 absolute -top-3 -left-3  z-50">
-                                {age} years
-                            </Typography>
-                           } 
+                            {
+                                age &&
+                                <Typography variant="body2" className="bg-cyan-300 rounded-2xl inline-block px-3 py-1 absolute -top-3 -left-3  z-50">
+                                    {age} years
+                                </Typography>
+                            }
 
                             <Box className="flex flex-col md:flex-row gap-3 ">
                                 <Button variant="contained" color="success" >edit</Button>
