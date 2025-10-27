@@ -47,7 +47,7 @@ export default function Add({ people }: Props) {
             formData.append("url", url);
         }
 
-        await axios.post("http://localhost:12793/users", formData, {
+        await axios.post("https://super-web-application-backend-production.up.railway.app/users", formData, {
             headers: {
                 "Content-Type": "multipart/form-data"
             }
